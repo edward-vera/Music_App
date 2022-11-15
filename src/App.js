@@ -14,6 +14,7 @@ const label = { inputProps: { 'aria-label': 'Online Mode' } };
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isOnline, setIsOnline] = React.useState(false);
+  const [isLowVolume, setLowVolume] = React.useState(false);
 
   return (
     <div className="app">
@@ -24,14 +25,17 @@ function App() {
 
         <CardControllerWithChildren
         title="Master Volume"
-        description="Overrides all other douns settings in this application">
+        description="Overrides all other volume settings in this application">
         <Switch {...label} onChange={() => setIsOnline(!isOnline)}/>
         </CardControllerWithChildren>
 
         <CardControllerWithChildren
         title="Online Mode (NEW)"
         description="Is this application connected to the internet?">
-        <Volume />
+        <Volume
+        state={isLowVolume}
+        setState={setLowVolume}
+        />
         </CardControllerWithChildren>
         
         
@@ -48,6 +52,14 @@ function App() {
         You won't be able to share or stream music to other devices.
         </p>
       )}
+
+      {isLowVolume >= 80 && (
+        <p>
+        Listening to music at a high volume could cause long-term hearing loss.
+        </p>
+      )}
+
+      
       </>
 
     ) : (
