@@ -1,16 +1,20 @@
-import * as React from 'react';
+import React, {useEffect} from 'react';
 import Box from '@mui/material/Box';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 
-export default function BasicSelect() {
-  const [age, setAge] = React.useState('');
+export default function Qaulity(props) {
+  console.log(props)
 
   const handleChange = (event) => {
-    setAge(event.target.value);
+    props.setState(event.target.value);
   };
+
+  useEffect(()=> {
+    console.log(props.state);
+}, [props.setState, props.state])
 
   return (
     <Box sx={{ minWidth: 120 }}>
@@ -19,13 +23,13 @@ export default function BasicSelect() {
         <Select
           labelId="demo-simple-select-label"
           id="demo-simple-select"
-          value={age}
+          value={props.value}
           label="Sound Quality"
           onChange={handleChange}
         >
-          <MenuItem value={10}>Low</MenuItem>
-          <MenuItem value={20}>Normal</MenuItem>
-          <MenuItem value={30}>High</MenuItem>
+          <MenuItem value={1}>Low</MenuItem>
+          <MenuItem value={2}>Normal</MenuItem>
+          <MenuItem value={3}>High</MenuItem>
         </Select>
       </FormControl>
     </Box>

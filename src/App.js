@@ -15,6 +15,7 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isOnline, setIsOnline] = React.useState(false);
   const [isLowVolume, setLowVolume] = React.useState(false);
+  const [isLowQuality, setLowQuality] = React.useState(false);
 
   return (
     <div className="app">
@@ -42,7 +43,9 @@ function App() {
         <CardControllerWithChildren
         title="Sound Qaulity"
         description="Manually control the music quality in event of poor connection">
-        <Quality />
+        <Quality 
+        state={isLowQuality}
+        setState={setLowQuality}/>
         </CardControllerWithChildren>
 
       <h4>System Notifications:</h4>
@@ -58,7 +61,12 @@ function App() {
         Listening to music at a high volume could cause long-term hearing loss.
         </p>
       )}
-
+      
+      {isLowQuality === 1 && (
+        <p>
+        Music quality is degraded. Increase quality if your connection allows it.
+        </p>
+      )}
       
       </>
 
