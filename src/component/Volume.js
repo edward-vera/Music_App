@@ -30,5 +30,4 @@ export default function Volume(props) {
       </Stack>
     </Box>
   );
-  console.log();
 }

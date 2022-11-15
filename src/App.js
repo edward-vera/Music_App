@@ -25,14 +25,16 @@ function App() {
           <p>Welcome Nerd!</p>
 
         <CardControllerWithChildren
-        title="Master Volume"
-        description="Overrides all other volume settings in this application">
-        <Switch {...label} onChange={() => setIsOnline(!isOnline)}/>
+        title="Online Mode"
+        description="Is this application connected to the internet?">
+        <Switch 
+        {...label} onChange={() => setIsOnline(!isOnline)}
+        />
         </CardControllerWithChildren>
 
         <CardControllerWithChildren
-        title="Online Mode (NEW)"
-        description="Is this application connected to the internet?">
+        title="Master Volume"
+        description="Overrides all other volume settings in this application">
         <Volume
         state={isLowVolume}
         setState={setLowVolume}
