@@ -1,23 +1,58 @@
-import logo from './logo.svg';
-import './App.css';
+import React, {useState} from 'react';
+import './app.css'; 
+import Header from './component/Header'
+import Signin from './component/Signin'
+import Switch from '@mui/material/Switch';
+import CardControllerWithChildren from './component/CardControllerWithChildren';
+import Volume from './component/Volume';
+import Quality from './component/Quality'
+
+
+const label = { inputProps: { 'aria-label': 'Online Mode' } };
+
 
 function App() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isOnline, setIsOnline] = React.useState(false);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
+    <div className="app">
+      <Header />
+      {isLoggedIn === true ? ( 
+        <>     
+          <p>Welcome Nerd!</p>
+
+        <CardControllerWithChildren
+        title="Master Volume"
+        description="Overrides all other douns settings in this application">
+        <Switch {...label} onChange={() => setIsOnline(!isOnline)}/>
+        </CardControllerWithChildren>
+
+        <CardControllerWithChildren
+        title="Online Mode (NEW)"
+        description="Is this application connected to the internet?">
+        <Volume />
+        </CardControllerWithChildren>
+        
+        
+        <CardControllerWithChildren
+        title="Sound Qaulity"
+        description="Manually control the music quality in event of poor connection">
+        <Quality />
+        </CardControllerWithChildren>
+
+      <h4>System Notifications:</h4>
+      {isOnline && (
         <p>
-          Edit <code>src/App.js</code> and save to reload.
+        Your application is offline. 
+        You won't be able to share or stream music to other devices.
         </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      )}
+      </>
+
+    ) : (
+    <Signin setIsLoggedIn={setIsLoggedIn}/>
+    )}
     </div>
   );
 }
